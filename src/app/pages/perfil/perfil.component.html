@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+    <mat-card-header>
+
+      <mat-card-title>Perfil de Usuario</mat-card-title>
+      <mat-card-subtitle>usuario y roles</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+       NOMBRE USUARO: {{usuario.username}}
+      </p>
+      <p>
+        ROLES: {{usuario.roles}}
+       </p>
+    </mat-card-content>
+
+  </mat-card>
+<button mat-raised-button color="accent" (click)="cancelar()">Cerrar</button>

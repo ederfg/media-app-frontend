@@ -1,0 +1,66 @@
+<mat-card>Ingrese los datos del Signo</mat-card>
+
+
+<form class="example-container" [formGroup]="form" #frmSigno="ngForm" (ngSubmit)="operar()">
+
+    
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+    <mat-form-field>
+        <input type="text" placeholder="Paciente" matInput [matAutocomplete]="autoPaciente" required
+            [formControl]="myControlPaciente" formControlName="paciente">
+           
+    </mat-form-field>
+    <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente" 
+        (optionSelected)="seleccionarPaciente($event)">
+        <mat-option *ngFor="let p of pacientesFiltrados | async" [value]="p">
+            {{ p.nombres }} {{p.apellidos}}
+        </mat-option>
+    </mat-autocomplete>
+    <button mat-raised-button type="button"  (click)="agregarPacienteNuevo()" color="primary">+ AgregarPaciente</button>
+   
+
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" [max]="maxFecha" formControlName="fecha"
+            [(ngModel)]="fechaSeleccionada">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Temperatura" minlength="3" required formControlName="temperatura">
+        <small *ngIf="f.temperatura.errors?.required && f.temperatura.touched" class="invalido">Temperatura es
+            Requerido</small>
+            <!--
+        <small *ngIf="f.temperatura.errors?.minlength" class="invalido">El campo debe ser mayor a 3 caracteres</small>-->
+    </mat-form-field>
+
+   
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulso" required formControlName="pulso" >
+        <small *ngIf="f.pulso.errors?.required && f.pulso.touched" class="invalido">Pulso es requerido</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo Respiratorio" required formControlName="ritmo" >
+        <small *ngIf="f.ritmo.errors?.required && f.ritmo.touched" class="invalido">Ritmo es requerido</small>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit"  [disabled]="frmSigno.invalid"> <!--[disabled]="frmSigno.invalid"-->
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/signo' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+</form>
+
+<!--
+    <p>{{form.value | json}}</p>-->
